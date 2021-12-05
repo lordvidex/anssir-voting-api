@@ -8,4 +8,10 @@ export class CreateOfficeDto {
     example: 'President',
   })
   name: string;
+  
+  @ApiProperty({
+    description: 'list of candidate names for this office',
+    example: ['Evans Owamoyo', 'Evans2 Owamoyo2'],
+  })
+  candidates: string[];
 }
