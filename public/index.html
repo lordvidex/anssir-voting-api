@@ -23,9 +23,8 @@
             data: {
                 title: 'WebSockets LiveData Test',
                 messages: ['Message 1', 'Message 2', 'Message 3'],
-                text: '',
                 socket: null,
-                
+
             },
             methods: {
                 receiveMessage(messages) {
@@ -33,7 +32,7 @@
                 }
             },
             created() {
-                const url = 'https://anssir-voting-api.herokuapp.com/'
+                const url = 'https://anssir-voting-api.herokuapp.com'
                 this.socket = io(`${url}/live`);
                 this.socket.on('message', (msg) => {
                     this.receiveMessage(msg);
