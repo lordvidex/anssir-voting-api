@@ -14,14 +14,14 @@ async function bootstrap() {
     .setTitle('ANSSIR voting API')
     .setDescription('Secure API for ANSSIR 2022 voting')
     .addServer(`http://localhost:${PORT}`, 'Local Server')
-    .addServer(process.env.HOST, 'Production Server')
+    .addServer(process.env.HOSTNAME, 'Production Server')
     // .addBearerAuth()
     .build();
 
   const doc = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('docs', app, doc);
 
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(PORT || 3000);
 }
 
 bootstrap();
