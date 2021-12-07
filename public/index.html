@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https:cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://anssir-voting-api.herokuapp.com/socket.io/socket.io.js"></script>
   </head>
   <body>
       <div id="v-app">
@@ -32,7 +32,7 @@
                 }
             },
             created() {
-                const url = 'https://anssir-voting-api.herokuapp.com/' || 'http://localhost:3000'
+                const url = 'https://anssir-voting-api.herokuapp.com/'
                 this.socket = io(`${url}/live`);
                 this.socket.on('message', (msg) => {
                     this.receiveMessage(msg);
