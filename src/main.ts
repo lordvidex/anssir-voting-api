@@ -13,6 +13,7 @@ async function bootstrap() {
     .setTitle('ANSSIR voting API')
     .setDescription('Secure API for ANSSIR 2022 voting')
     .addServer(`http://localhost:${PORT}`)
+    .addServer(process.env.HOST)
     // .addBearerAuth()
     .build();
 

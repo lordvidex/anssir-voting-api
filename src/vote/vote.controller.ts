@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { VoteGateway } from 'src/vote/vote.gateway';
 import { VoteDto } from './dto/vote.dto';
@@ -13,10 +13,12 @@ export class VoteController {
   ) {}
 
   @Post()
+  @HttpCode(200)
   async voteForCandidate(@Body() candidate: VoteDto): Promise<string> {
     const newResult = await this.voteService.voteForCandidate(candidate);
-    console.log(newResult)
+    // update the live listeners
     this.voteGateway.broadCastResult(newResult);
+
     return 'Vote successfully counted';
   }
 

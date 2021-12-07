@@ -32,7 +32,7 @@ export class VoteService {
     data.forEach((v) => set.add(v));
     try {
       const offices = await this.validateVotes(set.toArray());
-      this.countVotes(offices, id);
+      await this.countVotes(offices, id);
       return await this.getVotingResults();
     } catch (err) {
       throw err;
@@ -40,7 +40,7 @@ export class VoteService {
   }
 
   /**
-   * 
+   *
    * @param id id of the voter
    * @returns true if user has voted before or false otherwise
    */

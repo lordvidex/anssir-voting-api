@@ -11,10 +11,6 @@
   <body>
       <div id="v-app">
         <h1> {{ title }}</h1>
-        <form>
-            <input v-model="text" type="text" />
-            <button type="submit" @click.prevent="sendMessage()">Send</button>
-        </form>
         <p>
             <ul>
                 <li v-for="msg of messages">{{ msg }}</li>
@@ -25,7 +21,7 @@
         var app = new Vue({
             el: '#v-app',
             data: {
-                title: 'WebSockets Tester',
+                title: 'WebSockets LiveData Test',
                 messages: ['Message 1', 'Message 2', 'Message 3'],
                 text: '',
                 socket: null,
@@ -36,9 +32,9 @@
                 }
             },
             created() {
-                this.socket = io('http://localhost:3000/live');
+                const url = process.env.HOST || 'http://localhost:3000'
+                this.socket = io(`${url}/live`);
                 this.socket.on('message', (msg) => {
-                    alert(msg[2].candidates.votes.length)
                     this.receiveMessage(msg);
                 })
             }
