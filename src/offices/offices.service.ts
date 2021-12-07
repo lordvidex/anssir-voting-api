@@ -39,7 +39,7 @@ export class OfficesService {
   }
 
   async getOffices(): Promise<Office[]> {
-    return await this.officeModel.find();
+    return await this.officeModel.find().select('-__v');
   }
 
   async getOfficeWithId(id: string): Promise<Office> {
@@ -64,7 +64,7 @@ export class OfficesService {
     return await office.save();
   }
 
-  candidateListToModels(arr: string[]): Candidate[] {
+  candidateListToModels(arr: string[]): CandidateDocument[] {
     return arr.map(
       (candidate) => new this.candidateModel({ name: candidate }),
     );

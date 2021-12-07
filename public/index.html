@@ -31,17 +31,14 @@
                 socket: null,
             },
             methods: {
-                sendMessage() {
-                    this.socket.emit('msgToServer', {text: this.text});
-                    console.log('sent message to server');
-                },
-                receiveMessage(msg) {
-                    this.messages.push(msg);
+                receiveMessage(messages) {
+                    this.messages = messages;
                 }
             },
             created() {
-                this.socket = io('http://localhost:3000');
-                this.socket.on('msgToServer', (msg) => {
+                this.socket = io('http://localhost:3000/live');
+                this.socket.on('message', (msg) => {
+                    alert(msg[2].candidates.votes.length)
                     this.receiveMessage(msg);
                 })
             }
