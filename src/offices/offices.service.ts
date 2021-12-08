@@ -25,16 +25,19 @@ export class OfficesService {
     }
   }
 
-  async replaceOfficeWithId(id: string, data: CreateOfficeDto): Promise<Office> {
+  async replaceOfficeWithId(
+    id: string,
+    data: CreateOfficeDto,
+  ): Promise<Office> {
     const office = await this.officeModel.findById(id);
-    const {name, candidates} = data;
-    if (!candidates || candidates.length === 0 ) {
+    const { name, candidates } = data;
+    if (!candidates || candidates.length === 0) {
       throw new BadRequestException('No candidates found');
     }
-    if(name) {
+    if (name) {
       office.name = name;
     }
-    office.candidates = this.candidateListToModels(candidates)
+    office.candidates = this.candidateListToModels(candidates);
     return await office.save();
   }
 
@@ -47,7 +50,7 @@ export class OfficesService {
   }
 
   async deleteOffice(id: string): Promise<Office> {
-    return await this.officeModel.findById(id).lean();
+    return await this.officeModel.findByIdAndRemove(id).lean();
   }
 
   async updateOfficeWithId(id: string, data: UpdateOfficeDto): Promise<Office> {
@@ -55,8 +58,8 @@ export class OfficesService {
     const { candidates, name } = data;
     var candidateObjects: Candidate[];
     if (candidates) {
-      candidateObjects = this.candidateListToModels(candidates)
-      office.candidates.push.apply(office.candidates,candidateObjects);
+      candidateObjects = this.candidateListToModels(candidates);
+      office.candidates.push.apply(office.candidates, candidateObjects);
     }
     if (name) {
       office.name = name;
@@ -65,8 +68,6 @@ export class OfficesService {
   }
 
   candidateListToModels(arr: string[]): CandidateDocument[] {
-    return arr.map(
-      (candidate) => new this.candidateModel({ name: candidate }),
-    );
+    return arr.map((candidate) => new this.candidateModel({ name: candidate }));
   }
 }
