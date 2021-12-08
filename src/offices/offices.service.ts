@@ -17,7 +17,11 @@ export class OfficesService {
   async createOffice(
     createOfficeDto: CreateOfficeDto,
   ): Promise<Office | undefined> {
-    const office = new this.officeModel(createOfficeDto);
+    const { name, candidates } = createOfficeDto;
+    const office = new this.officeModel({
+      name: name,
+      candidates: this.candidateListToModels(candidates),
+    });
     try {
       return await office.save();
     } catch (error) {
