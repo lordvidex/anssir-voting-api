@@ -32,8 +32,7 @@
                 }
             },
             created() {
-                const url = process.env.HOSTNAME || 'http://localhost:3000'
-                this.socket = io(`${url}/live`);
+                this.socket = io('https://anssir-voting-api.herokuapp.com/live');
                 this.socket.on('message', (msg) => {
                     this.receiveMessage(msg);
                 })
