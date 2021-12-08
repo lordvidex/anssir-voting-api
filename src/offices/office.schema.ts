@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Document } from 'mongoose';
-import { Candidate, CandidateDocument } from './candidate.schema';
+import { Candidate } from './candidate.schema';
 
 export type OfficeDocument = Office & Document;
 
@@ -15,7 +15,7 @@ export class Office {
   @ApiProperty({
     description: 'List of candidates contesting for this position',
   })
-  candidates: CandidateDocument[];
+  candidates: Candidate[];
 }
 
 export const OfficeSchema = SchemaFactory.createForClass(Office);

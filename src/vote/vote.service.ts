@@ -85,7 +85,7 @@ export class VoteService {
         .updateOne(
           {
             _id: vote._id,
-            candidates: { $elemMatch: { _id: vote.candidates[0]._id } },
+            candidates: { $elemMatch: { name: vote.candidates[0].name } },
           },
           {
             $set: { 'candidates.$.votes': vote.candidates[0].votes },
