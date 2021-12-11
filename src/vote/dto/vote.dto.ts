@@ -14,9 +14,4 @@ export class VoteData {
   office: string;
   @IsMongoId()
   candidate: string;
-
-  toString(): string {
-    // only one office per vote is allowed
-    return this.office
-  }
 }

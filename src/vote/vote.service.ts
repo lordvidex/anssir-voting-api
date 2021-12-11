@@ -26,8 +26,8 @@ export class VoteService {
     if (await this.hasVoted(id)) {
       throw new BadRequestException('This user has already voted');
     }
-
-    const set: Set<VoteData> = new Set();
+    
+    const set: Set<VoteData> = new Set((data) => data.office);
 
     data.forEach((v) => set.add(v));
     try {
