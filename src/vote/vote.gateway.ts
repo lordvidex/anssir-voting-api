@@ -37,6 +37,7 @@ export class VoteGateway implements OnGatewayConnection, OnGatewayInit, OnGatewa
 
   @SubscribeMessage('message')
   broadCastResult(payload: Office[]) {
+    this.lastPayload = payload
     this.server.emit('message', payload);
   }
 }
