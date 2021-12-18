@@ -92,7 +92,7 @@ export class VoteService {
           },
         )
         .exec();
-      await this.addVote(userId);
     }
+    await this.addVote(userId);
   }
 }
